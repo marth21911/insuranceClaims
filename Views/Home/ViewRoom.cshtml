@@ -1,0 +1,9 @@
+@model OriginalInventory
+<div>
+    <ul>
+    @foreach (OriginalInventory a in ViewBag.ViewRoom)
+    {
+        <li><a href="/newinventory/@a.Room/@a.ID">@a.OldProduct</a></li>
+    }
+    </ul>
+</div>

@@ -1,0 +1,36 @@
+@model NewInventory
+
+<div class="navbar">
+    <h1>Let's get our money back.</h1>
+    <a href="/dashboard">Go to Dashboard</a>
+    <a href="logout" class="btn btn-danger">Logout</a>
+    <a href="/receipts/all">See all submitted receipts</a>
+    <a href="/lostinventory/all">See all items in loss file</a>
+    <a href="/contact/insurance">Send message to insurance</a>
+    <a href="/contact/adjuster">Send message to adjuster</a>
+</div>
+<form action="/newInventorySubmission" method="post" enctype="multipart/form-data">
+<div class="form-control">
+    @* Automatically put room in value for hidden input based on dashboard selection *@
+    <input type="hidden" asp-for ="OriginalId" value="@ViewBag.OriginalId.OriginalId">
+    <input type="hidden" asp-for="Room" value="@ViewBag.OriginalId.Room">
+    <label for="ProductName">Product</label>
+    <input asp-for="ProductName">
+    <span asp-validation-for="ProductName"></span>
+</div>
+<div class="form-control">
+    <label for="QuantityBought"> Quantity</label>
+    <input asp-for="QuantityBought">
+    <span asp-validation-for="QuantityBought"></span>
+</div>
+<div class="form-control">
+    <label for="QuantityBought"> Quantity</label>
+    <input asp-for="QuantityBought">
+    <span asp-validation-for="QuantityBought"></span>
+</div>
+<div class="form-control">
+    <input type="file" name="ReceiptData" >
+    <input type="submit" class="btn btn-info">
+</div>
+
+</form>

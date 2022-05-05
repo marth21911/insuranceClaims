@@ -1,0 +1,29 @@
+@model User
+
+@* Welcome to the page. On this page I want to view the name of the house, I want to see the most recent 3 submissions. I want to see the total amount recovered,
+and the total amount remaining on the right. On the left I want to see a prompt to begin finding items for receipt sUBMISSIONS. 
+I want all only one required drop down, but any number could be filled.
+Drop down menu for rooms, or search all items sorted by price, o *@
+
+<div class="navbar">
+    <h1>Let's get our money back.</h1>
+    <a href="logout" class="btn btn-danger">Logout</a>
+    <a href="/receipts/all">See all submitted receipts</a>
+    <a href="/lostinventory/all">See all items in loss file</a>
+    <a href="/contact/insurance">Send message to insurance</a>
+    <a href="/contact/adjuster">Send message to adjuster</a>
+</div>
+<div class="totalsDash">
+    <h3>Total Reclaimed Value: (Number will go here AllNewInventory += recovered depreciation)</h3>
+    <h3>Total Outstanding Value: (Number will go here AllOldInventory += Total recoverable depreciation - recovered depreciation)</h3>
+    <ul>
+        <li>Most Recent Receipt submission</li>
+        <li>Second Most Recent</li>
+        <li>3rd</li>
+        <li>4th</li>
+        <li>5th</li>
+    </ul>
+</div>
+<div>
+    Something on the right. Maybe links to all rooms, or drop down with the links. Undecided. 
+</div>
