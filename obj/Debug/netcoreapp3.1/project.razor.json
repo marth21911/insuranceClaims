@@ -14422,6 +14422,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\marth\\Documents\\coding\\csharpDojo\\insuranceClaims\\Views\\Home\\AllInventory.cshtml",
+      "TargetPath": "Views\\Home\\AllInventory.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\marth\\Documents\\coding\\csharpDojo\\insuranceClaims\\Views\\Home\\ViewRoom.cshtml",
       "TargetPath": "Views\\Home\\ViewRoom.cshtml",
       "FileKind": "mvc"

@@ -14,8 +14,6 @@ namespace insuranceClaims.Models
         [Required]
         [MinLength(3)]
         public string LName {get;set;}
-        [Required]
-        [MinLength(5)]
         public int ZipCode {get;set;}
         [Required]
         [EmailAddress]

@@ -1,0 +1,25 @@
+@model OriginalInventory
+<div class ="container">
+    <div class="row align-items-start">
+        <div class="col">
+            <ul>
+                @foreach (OriginalInventory a in ViewBag.ViewAll)
+                {
+                    <li> @a.OldProduct  $@a.UnitPrice  $@a.ACV @a.QuantityL</li>
+                }
+            </ul>
+        </div>
+        <div class="col">
+            <ul>
+                @if(ViewBag.ViewNew.Count == 0){
+                    <h3>Nothing New Submitted Yet</h3>
+                }else{
+                @foreach (NewInventory b in ViewBag.ViewNew)
+                {
+                    <li>@b.ProductName $@b.UnitPrice @b.QuantityBought @b.Recovered</li>
+                }
+                }
+            </ul>
+        </div>
+    </div> 
+</div>

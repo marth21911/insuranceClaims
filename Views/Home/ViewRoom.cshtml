@@ -1,9 +1,32 @@
 @model OriginalInventory
 <div>
-    <ul>
-    @foreach (OriginalInventory a in ViewBag.ViewRoom)
-    {
-        <li><a href="/newinventory/@a.Room/@a.ID">@a.OldProduct</a></li>
-    }
-    </ul>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Product Lost</th>
+                <th scope="col">Quantity Lost</th>
+                <th scope="col">Unit Price</th>
+                <th scope="col">Retail Quote</th>
+                <th scope="col">Depreciation</th>
+                <th scope="col">ACV Listed</th>
+                <th scope="col">Actions</th> 
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (OriginalInventory a in ViewBag.OneRoom)
+            {
+            <tr>
+                <th scope="row">@a.UniqueID</th>
+                <td>@a.OldProduct</td>
+                <td>@a.QuantityL</td>
+                <td>$@a.UnitPrice</td>
+                <td>$@a.Retail</td>
+                <td>$@a.Depreciation</td>
+                <td>$@a.ACV</td>
+                <td><a href="/newReceipt"/@a.UniqueID class="btn btn-info">Add Receipt</a></td>
+            </tr>  
+            }
+        </tbody>
+    </table>
 </div>

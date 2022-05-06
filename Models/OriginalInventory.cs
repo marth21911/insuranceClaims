@@ -8,6 +8,7 @@ namespace insuranceClaims.Models
     {
         [Key]
         public int ID {get;set;}
+        public int UniqueID {get;set;}
         public string OldProduct {get;set;}
         public string Room {get;set;}
         public int QuantityL {get;set;}
