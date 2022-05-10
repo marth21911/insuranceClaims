@@ -7,15 +7,14 @@ Drop down menu for rooms, or search all items sorted by price, o *@
 
 <div class="navbar">
     <h1>Let's get our money back.</h1>
-    <a href="logout" class="btn btn-danger">Logout</a>
     <a href="/receipts/all">See all submitted receipts</a>
     <a href="/AllInventory">See all items in loss file</a>
     <a href="/contact/insurance">Send message to insurance</a>
     <a href="/contact/adjuster">Send message to adjuster</a>
 </div>
 <div class="totalsDash">
-    <h3>Total Reclaimed Value: (Number will go here AllNewInventory += recovered depreciation)</h3>
-    <h3>Total Outstanding Value: (Number will go here AllOldInventory += Total recoverable depreciation - recovered depreciation)</h3>
+    <h3>Total Reclaimed Value: $@ViewBag.totRec </h3>
+    <h3>Total Outstanding Value: $@ViewBag.remainingDep </h3>
     <ul>
         <li>Most Recent Receipt submission</li>
         <li>Second Most Recent</li>

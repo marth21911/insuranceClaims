@@ -71,7 +71,7 @@ body {
 }
 .login {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   background-color: rgba(78, 78, 231, 0.521);
   width: 100%;
   height: 800px;

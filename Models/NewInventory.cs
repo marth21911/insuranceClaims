@@ -18,7 +18,7 @@ namespace insuranceClaims.Models
         public decimal UnitPrice {get;set;}
         public string ReceiptName {get;set;}
         [Required]
-        public byte[] ReceiptData {get;set;}
+        public string ReceiptData {get;set;}
         public decimal Recovered {get;set;}
         public DateTime CreatedAt {get;set;} = DateTime.Now;
         public DateTime UpdatedAt {get;set;} = DateTime.Now;

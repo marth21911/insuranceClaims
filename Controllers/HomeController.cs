@@ -16,6 +16,8 @@ namespace insuranceClaims.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private MyContext _context;
+        public decimal TotalRecovered = 0;
+        public decimal TotalDepreciation= 0;
         public HomeController(ILogger<HomeController> logger, MyContext context)
         {
             _context = context;
@@ -24,11 +26,31 @@ namespace insuranceClaims.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.AllRooms = _context.LostItems
+                .Select(a=>a.Room)
+                .Distinct();
             return View();
         }
         [HttpGet("dashboard")]
         public IActionResult Dashboard()
         {
+            ViewBag.AllNew = _context.ReplacedItems.ToList();
+            foreach(NewInventory a in ViewBag.AllNew)
+            {
+                TotalRecovered += a.Recovered;
+            }
+            ViewBag.ViewAll = _context.LostItems
+                .OrderBy(a=>a.OldProduct)
+                .ToList();
+            foreach(OriginalInventory b in ViewBag.ViewAll)
+            {
+                TotalDepreciation += b.Depreciation;
+            }
+            ViewBag.remainingDep = TotalDepreciation-TotalRecovered;
+            ViewBag.totRec = TotalRecovered;
+            ViewBag.AllRooms = _context.LostItems
+                .Select(a=>a.Room)
+                .Distinct();
             return View();
         }
         [HttpGet ("AllInventory")]
@@ -61,28 +83,51 @@ namespace insuranceClaims.Controllers
                 .Distinct();
             return View();
         }
-        [HttpGet("/newinventory/{room}/{itemId}")]
-        public IActionResult NewSubmissionForm (int itemId, string room)
+        [HttpGet("/newInventory/{uniqueID}")]
+        public IActionResult NewItemPage(int UniqueID)
         {
-            ViewBag.OriginalId = _context.LostItems.FirstOrDefault(a=>a.ID == itemId);
+            ViewBag.AllRooms = _context.LostItems
+                .Select(a=>a.Room)
+                .Distinct();
+            ViewBag.OriginalId = _context.LostItems.FirstOrDefault(a=>a.UniqueID == UniqueID);
             return View("NewInventorySubmission");
         }
         [HttpPost("/newInventorySubmission")]
         public IActionResult NewSubmission(NewInventory newItem)
         {   
-            ViewBag.OriginalItem = _context.LostItems.FirstOrDefault(a=>a.ID == newItem.OriginalId);
-            decimal PerItemDepreciation = ((ViewBag.OriginalItem.Depreciation)/ (ViewBag.OriginalItem.QuantityL));
-            decimal ProdDifference = newItem.UnitPrice - ViewBag.OriginalItem.UnitPrice;
+            ViewBag.OriginalId = _context.LostItems.FirstOrDefault(a=>a.UniqueID == newItem.OriginalId);
+            decimal PerItemDepreciation = ((ViewBag.OriginalId.Depreciation)/ (ViewBag.OriginalId.QuantityL));
+            decimal ProdDifference = newItem.UnitPrice - ViewBag.OriginalId.UnitPrice;
             decimal recoveredPerItem = Math.Min(PerItemDepreciation,ProdDifference);
             newItem.Recovered = recoveredPerItem;
             newItem.ReceiptName = (newItem.ProductName + (string)"receipt");
+            newItem.ReceiptData = 
+            // Figure out how to get images uploaded or connected
+
+            
             if(ModelState.IsValid)
             {
                 _context.ReplacedItems.Add(newItem);
                 _context.SaveChanges();
+                ViewBag.OriginalItem.QuantityL -= newItem.QuantityBought;
+                ViewBag.OriginalItem.UpdatedAt = DateTime.Now;
+                _context.SaveChanges();
                 return RedirectToAction("dashboard");
             } else{
+                ViewBag.AllRooms = _context.LostItems
+                .Select(a=>a.Room)
+                .Distinct();
+                ViewBag.OriginalId = _context.LostItems.FirstOrDefault(a=>a.UniqueID == newItem.OriginalId);
                 // i need to pass the room back in for hidden form
+                Console.WriteLine("Something went wrong");
+                Console.WriteLine(newItem.OriginalId);
+                Console.WriteLine(newItem.ItemId);
+                Console.WriteLine(newItem.ProductName);
+                Console.WriteLine(newItem.QuantityBought);
+                Console.WriteLine(newItem.UnitPrice);
+                Console.WriteLine(newItem.ReceiptName);
+                Console.WriteLine(newItem.Recovered);
+                Console.WriteLine(newItem.ReceiptData);
                 return View ("NewInventorySubmission");
             }
         }

@@ -1,11 +1,12 @@
 @model LogUser
-        <form action="/login" method = "post">
-
+    <form action="/login" method = "post">
+        <div class="form-group">
             <label for="LogEmail">Email</label>
-                <input asp-for="LogEmail" value="z@m.com">
+                <input asp-for="LogEmail" value="z@m.com" class="form-control">
                 <span asp-validation-for="LogEmail" class="text-danger"></span>
             <label for="ConfirmPassword">Password</label>
-                <input asp-for="LogPassword" value="password">
+                <input asp-for="LogPassword" value="password" class="form-control">
                 <span asp-validation-for="LogPassword" class="text-danger"></span>
             <input type="submit" class="btn btn-success" name="" id="">
-        </form>
+        </div>
+    </form>
